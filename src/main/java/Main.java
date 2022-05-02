@@ -7,16 +7,16 @@ public class Main {
         int size = console.nextInt();
 
         int[] inputArray = new int[size];
-        int Quantity = 0;
+        int quantity = 0;
         for (int i = 0; i < inputArray.length; i++) {
             System.out.print("Enter value: ");
             inputArray[i] = console.nextInt();
             if (inputArray[i] > 0) {
-                Quantity = Quantity + 1;
+                quantity = quantity + 1;
             }
         }
         int ii = 0;
-        int[] resultArray = new int[Quantity];
+        int[] resultArray = new int[quantity];
         for (int j = 0; j < inputArray.length; j++) {
             if (inputArray[j] > 0) {
                 resultArray[ii] = inputArray[j];
