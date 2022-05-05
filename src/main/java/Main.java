@@ -1,31 +1,37 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
-        System.out.print("Enter size: ");
-        int size = console.nextInt();
+        String[] inputArrayString;
+        Number resultAdd, resultSub, resultMult, resultDiv;
 
-        int[] inputArray = new int[size];
-        int quantity = 0;
-        for (int i = 0; i < inputArray.length; i++) {
-            System.out.print("Enter value: ");
-            inputArray[i] = console.nextInt();
-            if (inputArray[i] > 0) {
-                quantity = quantity + 1;
-            }
+        Console console = new Console();
+        inputArrayString = console.getArrayFromConsole();
+
+        Calculator calculator = new Calculator();
+        if (console.findDot(inputArrayString)) {
+            resultAdd = calculator.addition(console.resultArrayDouble(inputArrayString));
+
+            Double[] arguments = console.resultArrayDouble(inputArrayString);
+
+            resultSub = calculator.subtraction(arguments[0], arguments[1]);
+            resultMult = calculator.multiplication(arguments[0], arguments[1]);
+            resultDiv = calculator.division(arguments[0], arguments[1]);
         }
-        int ii = 0;
-        int[] resultArray = new int[quantity];
-        for (int j = 0; j < inputArray.length; j++) {
-            if (inputArray[j] > 0) {
-                resultArray[ii] = inputArray[j];
-                ii = ii + 1;
-            }
+        else {
+            resultAdd = calculator.addition(console.resultArrayLong(inputArrayString));
+
+            Long[] arguments = console.resultArrayLong(inputArrayString);
+
+            resultSub = calculator.subtraction(arguments[0], arguments[1]);
+            resultMult = calculator.multiplication(arguments[0], arguments[1]);
+            resultDiv = calculator.division(arguments[0], arguments[1]);
         }
-        for (int x : resultArray) {
-            System.out.print("[" + x + "] ");
-        }
-        System.out.println();
-        }
+
+        System.out.println("Addition result: " + new DecimalFormat("0.####").format(resultAdd));
+        System.out.println("Subtraction result (only the first 2 values): " + new DecimalFormat("0.####").format(resultSub));
+        System.out.println("Multiplication result (only the first 2 values): " + new DecimalFormat("0.####").format(resultMult));
+        System.out.println("Division result (only the first 2 values): " + new DecimalFormat("0.####").format(resultDiv));
     }
+}
